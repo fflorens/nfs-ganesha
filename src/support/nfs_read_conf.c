@@ -170,6 +170,8 @@ static struct config_item core_params[] = {
 #endif
 	CONF_ITEM_IP_ADDR("Bind_Addr", "0.0.0.0",
 			  nfs_core_param, bind_addr),
+	CONF_ITEM_STR("Bind_Iface", 1, 255, NULL,
+		       nfs_core_param, bind_iface),
 	CONF_ITEM_UI32("NFS_Program", 1, INT32_MAX, NFS_PROGRAM,
 		       nfs_core_param, program[P_NFS]),
 #ifdef _USE_NFS3

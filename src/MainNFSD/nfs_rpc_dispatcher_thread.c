@@ -667,6 +667,20 @@ static int Bind_sockets_V6(void)
 						str, tags[p]);
 				}
 
+				if (nfs_param.core_param.bind_iface != NULL) {
+					if (setsockopt(udp_socket[p],
+						       SOL_SOCKET, SO_BINDTODEVICE,
+						       nfs_param.core_param.bind_iface,
+						       strlen(nfs_param.core_param.bind_iface))) {
+						LogWarn(COMPONENT_DISPATCH,
+							"Cannot setsockopt BINDTODEVICE to iface %s, errno=%d (%s)",
+							nfs_param.core_param.bind_iface,
+							errno, strerror(errno));
+
+						return -1;
+					}
+				}
+
 				rc = bind(udp_socket[p],
 					  (struct sockaddr *)
 					  pdatap->bindaddr_udp6.addr.buf,
@@ -719,6 +733,20 @@ static int Bind_sockets_V6(void)
 				LogInfo(COMPONENT_DISPATCH,
 					"Binding TCP socket to address %s for %s",
 					str, tags[p]);
+			}
+
+
+			if (nfs_param.core_param.bind_iface != NULL) {
+				if (setsockopt(tcp_socket[p],
+					       SOL_SOCKET, SO_BINDTODEVICE,
+					       nfs_param.core_param.bind_iface,
+					       strlen(nfs_param.core_param.bind_iface))) {
+					LogWarn(COMPONENT_DISPATCH,
+						"Cannot setsockopt BINDTODEVICE to iface %s, errno=%d (%s)",
+						nfs_param.core_param.bind_iface,
+						errno, strerror(errno));
+					return -1;
+				}
 			}
 
 			rc = bind(tcp_socket[p],
@@ -805,6 +833,20 @@ static int Bind_sockets_V4(void)
 						str, tags[p]);
 				}
 
+				if (nfs_param.core_param.bind_iface != NULL) {
+					if (setsockopt(udp_socket[p],
+						       SOL_SOCKET, SO_BINDTODEVICE,
+						       nfs_param.core_param.bind_iface,
+						       strlen(nfs_param.core_param.bind_iface))) {
+						LogWarn(COMPONENT_DISPATCH,
+							"Cannot setsockopt BINDTODEVICE to iface %s, errno=%d (%s)",
+							nfs_param.core_param.bind_iface,
+							errno, strerror(errno));
+
+						return -1;
+					}
+				}
+
 				rc = bind(udp_socket[p],
 					  (struct sockaddr *)
 					  pdatap->bindaddr_udp6.addr.buf,
@@ -857,6 +899,20 @@ static int Bind_sockets_V4(void)
 				LogInfo(COMPONENT_DISPATCH,
 					"Binding TCP socket to address %s for %s",
 					str, tags[p]);
+			}
+
+			if (nfs_param.core_param.bind_iface != NULL) {
+				if (setsockopt(tcp_socket[p],
+					       SOL_SOCKET, SO_BINDTODEVICE,
+					       nfs_param.core_param.bind_iface,
+					       strlen(nfs_param.core_param.bind_iface))) {
+					LogWarn(COMPONENT_DISPATCH,
+						"Cannot setsockopt BINDTODEVICE to iface %s, errno=%d (%s)",
+						nfs_param.core_param.bind_iface,
+						errno, strerror(errno));
+
+					return -1;
+				}
 			}
 
 			rc = bind(tcp_socket[p],

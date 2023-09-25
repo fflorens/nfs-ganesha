@@ -232,6 +232,9 @@ typedef struct nfs_core_param {
 	/** The IPv4 or IPv6 address to which to bind for our
 	    listening port.  Set by the Bind_Addr option. */
 	sockaddr_t bind_addr;
+	/** The interface to bind on (for vrf-aware deployment)
+	    Set by the Bind_Iface option. */
+	char *bind_iface;
 	/** An array of RPC program numbers.  The correct values, by
 	    default, they may be set to incorrect values with the
 	    NFS_Program, MNT_Program, NLM_Program, and
